@@ -13,11 +13,15 @@ To get started with these automation scripts, follow the instructions below. Mak
 - Access to a terminal or command line interface.
 - (Optional) Elevated privileges for certain scripts that require administrative access (e.g., `sudo`).
 
+### To use the script files
+- Compile or install the script file and give execution permission to it by executing `chmod +x <script.sh>`
+- Add the file to `/usr/bin` directory to make it globally available for the whole system
+
 ### Cloning the Repository
 
 Clone this repository to your local machine using the following command:
 
 ```bash
-git clone https://github.com/your-username/bash-automation-scripts.git
+git clone https://github.com/Hash-Cracker/Automation_Scripts
 cd bash-automation-scripts
 ```
