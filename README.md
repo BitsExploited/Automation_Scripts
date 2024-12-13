@@ -15,7 +15,11 @@ To get started with these automation scripts, follow the instructions below. Mak
 
 ### To use the script files
 - Compile or install the script file and give execution permission to it by executing `chmod +x <script.sh>`
-- Add the file to `/usr/bin` directory to make it globally available for the whole system
+- Add the file to `/usr/bin` directory to make it globally available for the whole system.
+```bash
+chmod +x <script.sh>
+sudo cp <script.sh> /usr/bin
+```
 
 ### Cloning the Repository
 
