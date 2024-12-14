@@ -7,7 +7,7 @@ fi
 
 JAVA_FILE="$1"
 CLASS_NAME=$(basename "$JAVA_FILE" .java)
-shift  # Remove the first argument (Java file) from the list
+shift  
 
 if [ ! -f "$JAVA_FILE" ]; then
   echo "Error: File '$JAVA_FILE' not found!"
