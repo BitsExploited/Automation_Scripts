@@ -48,5 +48,5 @@ if command -v snap &> /dev/null; then
     sudo snap refresh
 fi
 
-echo "Package manager caches cleared successfully!"
+notify-send echo "Package manager caches cleared successfully!"
 
