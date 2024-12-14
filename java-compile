@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <JavaFile>"
+  exit 1
+fi
+
+JAVA_FILE="$1"
+CLASS_NAME=$(basename "$JAVA_FILE" .java)
+
+if [ ! -f "$JAVA_FILE" ]; then
+  echo "Error: File '$JAVA_FILE' not found!"
+  exit 1
+fi
+
+echo "Compiling $JAVA_FILE..."
+javac "$JAVA_FILE"
+
+COMPILE_STATUS=$?
+
+if [ $COMPILE_STATUS -ne 0 ]; then
+  echo "Compilation failed with errors:"
+  javac "$JAVA_FILE"
+  exit 1
+else
+  echo "Compilation successful. Running $CLASS_NAME..."
+  java "$CLASS_NAME"
+fi
