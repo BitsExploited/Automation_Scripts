@@ -22,7 +22,7 @@ elif command -v apk &>/dev/null; then #Alpine Linux
 elif command emerge &>/dev/null; then #Gentoo based
   sudo emerge --sync && sudo emerge -uDN @world --ask=n 
 elif command -v slackpkg &>/dev/null; then #Slackware
-  sudo sudo slackpkg upgrade-all -batch
+  sudo slackpkg upgrade-all -batch
 elif command -v eopkg &>/dev/null; then #Solus
   sudo eopkg up --assumeyes
 elif command -v xbps &>/dev/null; then #Void Linux
