@@ -1,0 +1,52 @@
+#!/bin/bash
+
+echo "Clearing system caches..."
+
+echo "Clearing page cache..."
+sudo sync; echo 3 > /proc/sys/vm/drop_caches
+
+echo "Clearing dentries and inodes..."
+sudo sync; echo 2 > /proc/sys/vm/drop_caches
+
+echo "Clearing page cache, dentries, and inodes..."
+sudo sync; echo 1 > /proc/sys/vm/drop_caches
+
+echo "System cache cleared successfully!"
+
+if command -v apt-get &> /dev/null; then
+    echo "Clearing APT cache..."
+    sudo apt-get clean
+    sudo apt-get autoremove -y
+    sudo apt-get autoclean
+fi
+
+if command -v yum &> /dev/null; then
+    echo "Clearing YUM cache..."
+    sudo yum clean all
+    sudo yum autoremove -y
+fi
+
+if command -v dnf &> /dev/null; then
+    echo "Clearing DNF cache..."
+    sudo dnf clean all
+    sudo dnf autoremove -y
+fi
+
+if command -v pacman &> /dev/null; then
+    echo "Clearing Pacman cache..."
+    sudo pacman -Scc --noconfirm
+fi
+
+if command -v zypper &> /dev/null; then
+    echo "Clearing Zypper cache..."
+    sudo zypper clean
+fi
+
+if command -v snap &> /dev/null; then
+    echo "Clearing Snap cache..."
+    sudo snap set system refresh.retain=2
+    sudo snap refresh
+fi
+
+echo "Package manager caches cleared successfully!"
+
