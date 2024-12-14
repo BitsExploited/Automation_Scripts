@@ -27,5 +27,5 @@ Clone this repository to your local machine using the following command:
 
 ```bash
 git clone https://github.com/Hash-Cracker/Automation_Scripts
-cd bash-automation-scripts
+cd Automation_Scripts
 ```
