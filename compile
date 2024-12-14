@@ -1,12 +1,12 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-    echo "Usage: $0 <source_file.c>"
+    echo "Usage: $0 <source_file.c> [arguments_for_a.out]"
     exit 1
 fi
 
 C_file="$1"
-
+shift  
 if [ ! -f "$C_file" ]; then
     echo "Error: File '$C_file' not found!"
     exit 1
@@ -15,9 +15,8 @@ fi
 gcc "$C_file" -o a.out 2>&1
 
 if [ $? -eq 0 ]; then
-    ./a.out
+    ./a.out "$@"
 else
     echo "Compilation failed."
     exit 1
 fi
-
