@@ -1,12 +1,13 @@
 #!/bin/bash
 
-if [ $# -ne 1 ]; then
-  echo "Usage: $0 <JavaFile>"
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 <JavaFile> [arguments]"
   exit 1
 fi
 
 JAVA_FILE="$1"
 CLASS_NAME=$(basename "$JAVA_FILE" .java)
+shift  # Remove the first argument (Java file) from the list
 
 if [ ! -f "$JAVA_FILE" ]; then
   echo "Error: File '$JAVA_FILE' not found!"
@@ -24,5 +25,5 @@ if [ $COMPILE_STATUS -ne 0 ]; then
   exit 1
 else
   echo "Compilation successful. Running $CLASS_NAME..."
-  java "$CLASS_NAME"
+  java "$CLASS_NAME" "$@"
 fi
