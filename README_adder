@@ -1,0 +1,30 @@
+#!/bin/bash
+
+README_FILE="README.md"
+
+if [[ ! -f $README_FILE ]]; then
+    echo "# Images in Repository" > $README_FILE
+else
+    cp $README_FILE "$README_FILE.bak"
+    echo "Existing README file backed up as $README_FILE.bak"
+fi
+
+if [[ ! -s $README_FILE ]]; then
+    echo "# Images in Repository" >> $README_FILE
+fi
+
+IMAGE_EXTENSIONS=("jpg" "jpeg" "png" "gif" "bmp" "tiff" "svg" "webp")
+
+for ext in "${IMAGE_EXTENSIONS[@]}"; do
+    for image in *."$ext"; do
+        if [[ -f $image ]]; then
+            if ! grep -q "!\[.*\]($image)" $README_FILE; then
+                echo "Adding $image to README.md"
+                echo "![${image}](./${image})" >> $README_FILE
+            fi
+        fi
+    done
+done
+
+echo "README updated successfully!"
+
