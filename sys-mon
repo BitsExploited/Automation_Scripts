@@ -1,0 +1,45 @@
+#!/bin/bash
+
+
+LOG_DIR="./system_logs"
+mkdir -p "$LOG_DIR"
+
+LOG_FILE="$LOG_DIR/system_stats_$(date +%Y%m%d_%H%M%S).log"
+
+get_cpu_usage() {
+    top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}'
+}
+
+get_memory_usage() {
+    free -m | awk '/Mem:/ {printf "%.2f%%", $3*100/$2}'
+}
+
+get_disk_usage() {
+    df -h / | awk '/\// {print $5}'
+}
+
+get_system_load() {
+    uptime | awk -F'load average:' '{ print $2 }' | tr -d ' '
+}
+
+echo "Starting system monitoring... Press Ctrl+C to stop"
+echo "System Monitor Log - Started at $(date)" > "$LOG_FILE"
+
+while true; do
+    timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    cpu_usage=$(get_cpu_usage)
+    mem_usage=$(get_memory_usage)
+    disk_usage=$(get_disk_usage)
+    load_avg=$(get_system_load)
+    
+    echo "----------------------------------------"
+    echo "Timestamp: $timestamp"
+    echo "CPU Usage: $cpu_usage"
+    echo "Memory Usage: $mem_usage"
+    echo "Disk Usage: $disk_usage"
+    echo "Load Average: $load_avg"
+    
+    echo "[$timestamp] CPU: $cpu_usage, MEM: $mem_usage, DISK: $disk_usage, LOAD: $load_avg" >> "$LOG_FILE"
+    
+    sleep 5
+done
