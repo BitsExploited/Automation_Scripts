@@ -1,0 +1,10 @@
+#!/bin/bash
+
+BATTERY_LEVEL=$(acpi -b | grep -P -o '[0-9]+(?=%)')
+
+CHARGING_STATUS=$(acpi -b | grep -o 'Charging\|Discharging')
+
+if [ "$CHARGING_STATUS" == "Discharging" ] && [ "$BATTERY_LEVEL" -le 20 ]; then
+    notify-send -u critical "Low Battery" "Battery is at ${BATTERY_LEVEL}%. Please plug in your charger."
+fi
+
