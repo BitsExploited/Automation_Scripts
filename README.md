@@ -21,6 +21,9 @@ chmod +x <script.sh>
 sudo cp <script.sh> /usr/bin
 ```
 
+### External Monitor file
+The external monitor file has scripts to connect to the external monitor
+
 ### Cloning the Repository
 
 Clone this repository to your local machine using the following command:
