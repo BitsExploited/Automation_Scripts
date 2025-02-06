@@ -1,0 +1,9 @@
+#!/bin/bash
+
+read -p "Enter the power profile: " prof 
+
+if powerprofilesctl set "$prof"; then
+  echo "Switched to '$prof' successfully"
+else 
+  echo "Failed to switch. Enter the name correctly"
+fi
